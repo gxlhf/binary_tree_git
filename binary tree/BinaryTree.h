@@ -4,7 +4,7 @@
 #include <iostream>
 #include <sstream>
 
-//#include "PDF.h" // for the PDF display
+#include "PDF.cc" // for the PDF display
 
 using namespace std;
 
@@ -27,16 +27,16 @@ struct BTNode {
     this->left = src.left;
     this->right = src.right;
   }
-  
+
   // Simple tests
   bool is_leaf() const { return (left == NULL && right == NULL); }
 };
 
 
-/**************************************************************************** 
- * 
+/****************************************************************************
+ *
  * CLASS:  BinaryTree
- * 
+ *
  ****************************************************************************/
 
 /* A 'BinaryTree' class implements a basic binary tree.  It serves
@@ -64,12 +64,12 @@ class BinaryTree {
   bool empty_this() { empty(root); root = NULL; return true; }
   void init_complete( T *elements, int n_elements );
   int to_flat_array( T* elements, int max ) const;
-  
+
   /* Traversal */
   void preorder( void (*f)(const T&) )  const { return preorder(f, root); }
   void inorder( void (*f)(const T&) )   const { return inorder(f, root); }
   void postorder( void (*f)(const T&) ) const { return postorder(f, root); }
-               
+
   /* Operators */
   bool operator==( const BinaryTree& src ) const;
   bool operator!=( const BinaryTree& src ) const;
@@ -80,7 +80,7 @@ class BinaryTree {
   friend ostream& operator<<( ostream& out, const BinaryTree<S>& src );
 
   /* Display */
-  /**void display( PDF* pdf, const string& annotation = "" ) const;**/
+  void display( PDF* pdf, const string& annotation = "" ) const;
 
 
  protected:
@@ -88,7 +88,7 @@ class BinaryTree {
 
   /* "Helper" functions for the basic operations */
   BTNode<T> *clone( BTNode<T> *node );
-  
+
   int height( BTNode<T>* node ) const;
   int balance_factor( BTNode<T>* node ) const;
   int node_count( BTNode<T>* node ) const;
@@ -101,16 +101,16 @@ class BinaryTree {
   void empty( BTNode<T>* node );
 
   BTNode<T>* init_complete( T *elements, int n_elements, int index );
-  
+
   int to_flat_array( T *elements, int max, BTNode<T> *node, int index,
                      int& max_index ) const;
-  /**void display( PDF *pdf, BTNode<T>* node, int leaf_dist,
-	double x, double y, double scale ) const;**/
+  void display( PDF *pdf, BTNode<T>* node, int leaf_dist,
+	double x, double y, double scale ) const;
 
   template<class S>
   friend ostream& operator<<( ostream& out, const BTNode<S>& src );
 
-}; 
+};
 
 
 /*
@@ -211,7 +211,7 @@ BTNode<T>* BinaryTree<T>::init_complete(T *elements, int n_elements,int index)
 	// Initializes this tree, regarding it as a complete binary tree,
 	// starting at the array node at 'index'
 {
-	// check for the end of the array 
+	// check for the end of the array
 	if (index > n_elements)
 		return NULL;
 
@@ -227,8 +227,10 @@ BinaryTree<T>::BinaryTree(const BinaryTree& src)
 {
 	T* srcEle;
 	int srcNodeNum = src.node_count();
-	srcEle = new T [srcNodeNum];
+
+	srcEle = new T [srcNodeNum + 1];
 	src.to_flat_array(srcEle, srcNodeNum);
+
 	root = NULL;
 	init_complete(srcEle, srcNodeNum);
 }
@@ -381,11 +383,11 @@ bool BinaryTree<T>::operator==(const BinaryTree& src) const
 
 	//convert the two tree into flat array and compare.
 	T *thisElem, *srcElem;
-	thisElem = new T[thisNodeNum];
-	srcElem = new T[srcNodeNum];
+	thisElem = new T[thisNodeNum + 1];
+	srcElem = new T[srcNodeNum + 1];
 	this->to_flat_array(thisElem, thisNodeNum);
 	src.to_flat_array(srcElem, srcNodeNum);
-	for (int i = 0; i < thisNodeNum; i++)
+	for (int i = 1; i <= thisNodeNum; i++)
 	{
 		if (thisElem[i] != srcElem[i])
 			return 0;
@@ -408,7 +410,7 @@ BinaryTree<T>& BinaryTree<T>::operator=(const BinaryTree& src)
 	src.to_flat_array(srcEle, srcNodeNum);
 	this->root = NULL;
 	this->init_complete(srcEle, srcNodeNum);
-	return *this; 
+	return *this;
 }
 
 /******************/
@@ -451,7 +453,7 @@ ostream& operator<<(ostream& out, const BTNode<T>* node)
 	if (!node)
 		return out;
 
-	// write, using an inorder traversal  
+	// write, using an inorder traversal
 	out << node->left;  // (recursive)
 	out << node->elem;  // (nonrecursive)
 	out << " ";
@@ -463,7 +465,7 @@ ostream& operator<<(ostream& out, const BTNode<T>* node)
 /***********/
 /* Display */
 /***********/
-/**
+
 static const double font_scale = 20;
 static const double level_sep = 90;
 static const double node_sep = 30;
@@ -536,6 +538,6 @@ pdf->text_box(str.str().c_str(), x, y,
 scale*node_box_margin, scale*node_box_r,
 0, scale*font_scale);
 }
-**/
+
 
 #endif

@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
+#include "PDFFonts.cc"
 
 /*********/
 /* Fonts */
@@ -59,16 +60,16 @@ inline int font_index( int font )
 }
 
 
-/**************************************************************************** 
- * 
+/****************************************************************************
+ *
  * CLASS:  PDFColor
- * 
+ *
  ****************************************************************************/
 
 class PDFColor {
  public:
   double r, g, b;
-  
+
   PDFColor() { r = g = b = 0; }
   PDFColor( double gray ) { r = g = b = gray; }
   PDFColor( double red, double green, double blue ) {
@@ -76,12 +77,12 @@ class PDFColor {
     g = green;
     b = blue;
   }
-  
+
 };
 
 
-/**************************************************************************** 
- * 
+/****************************************************************************
+ *
  * CLASS:  PDFStream
  *
  ****************************************************************************/
@@ -90,7 +91,7 @@ class PDFColor {
  * One use of such a stream is to contain a sequence of graphics commands.
  * There is one 'PDFstream' per page in this implementation.
  */
-   
+
 class PDFStream {
  public:
   PDFStream() { init(); }
@@ -100,7 +101,7 @@ class PDFStream {
   void append( const char *src );
 
  private:
-  
+
   char     *text;
   int       text_len;
   unsigned  size;
@@ -109,16 +110,16 @@ class PDFStream {
   void grow( unsigned new_size = 0 );
 
   void destroy() { delete[] text; }
-  
+
   friend class PDF;
   friend class PDFPage;
 };
 
 
-/**************************************************************************** 
- * 
+/****************************************************************************
+ *
  * CLASS:  PDFPage
- * 
+ *
  ****************************************************************************/
 
 class PDFPage {
@@ -126,7 +127,7 @@ class PDFPage {
   PDFPage() { annotation = NULL; }
   ~PDFPage() { destroy(); }
   int is_empty() const { return stream.is_empty(); }
-  
+
  private:
   PDFStream stream;
   char *annotation;
@@ -135,15 +136,15 @@ class PDFPage {
     if (annotation)
       free(annotation);
   }
-  
+
   friend class PDF;
 };
 
 
-/**************************************************************************** 
- * 
+/****************************************************************************
+ *
  * CLASS:  PDF
- * 
+ *
  ****************************************************************************/
 
 const int LetterWidth = int(72*8.5);
@@ -165,7 +166,7 @@ class PDF {
   int get_width() const { return width; }
   int get_height() const { return height; }
 
-  
+
   // Support stuff, for the page content
   void append( const char *cmd ) {
     pages[page].stream.append(cmd);
@@ -181,7 +182,7 @@ class PDF {
     char buf[1024];
     sprintf(buf, "%.3f %.3f %s", x, y, cmd);
     append(buf);
-  }  
+  }
   void int_cmd( int n, const char *cmd ) {
     sprintf(buf, "%d %s", n, cmd);
     pages[page].stream.append(buf);
@@ -199,8 +200,8 @@ class PDF {
         x1, y1, x2, y2, x3, y3, cmd);
     append(buf);
   }
-  
-  
+
+
   /*****************/
   /* PDF Operators */
   /*****************/
@@ -243,7 +244,7 @@ class PDF {
     sprintf(buf, "[ %.3f %.3f ] %.3f d", length1, length2, offset);
     append(buf);
   }
-  
+
   void resetdash() { cmd("[] 0 d"); }
 
   void fill() { cmd("f"); current_point = 0; }
@@ -259,11 +260,11 @@ class PDF {
   }
   void setgray_nonstroke( double gray ) {
     cmd(gray, "g");
-    nonstroke_color = PDFColor(gray);    
+    nonstroke_color = PDFColor(gray);
   }
   void G( double gray ) { cmd(gray, "G"); }
   void g( double gray ) { cmd(gray, "g"); }
-  
+
   void closepath() { cmd("h"); current_point = 0; }
   void h() { cmd("h"); }
 
@@ -294,7 +295,7 @@ class PDF {
   void K( double c, double m, double y, double k ) {
     setcolor(c, m, y, k, "K");
   }
-    
+
   void lineto( double x, double y ) {
     point_cmd(x, y, "l");
     current_x = x;
@@ -341,11 +342,11 @@ class PDF {
   }
   void setrgbcolor_stroke( double r, double g, double b ) {
     setcolor(r, g, b, "RG");
-    stroke_color = PDFColor(r, g, b);    
+    stroke_color = PDFColor(r, g, b);
   }
   void setrgbcolor_nonstroke( double r, double g, double b ) {
     setcolor(r, g, b, "rg");
-    nonstroke_color = PDFColor(r, g, b);        
+    nonstroke_color = PDFColor(r, g, b);
   }
   void RG( double r, double g, double b ) { setcolor(r, g, b, "RG"); }
   void rg( double r, double g, double b ) { setcolor(r, g, b, "rg"); }
@@ -367,7 +368,7 @@ class PDF {
   void W() { cmd("W"); }
   void eoclip() { cmd("W*"); }
   void W_star() { cmd("W*"); }
-  
+
 
   /**************/
   /* Text Stuff */
@@ -476,7 +477,7 @@ class PDF {
 	 double x, double y, double margin, double r,
 	 double min_width = 0, double min_height = 0 );
 
-  
+
  private:
   // Filename, etc
   char *filename;
@@ -497,25 +498,25 @@ class PDF {
   int    font;       // current font
   double font_scale; // current font scale
   int    text;       // true if we're in a text segment
-  
+
   // colors, current point, etc.
   PDFColor stroke_color;
   PDFColor nonstroke_color;
   double   current_x;
   double   current_y;
   int      current_point;
-  
+
   // character string buffer, for output
   static const unsigned buf_size = 4096;
   static char buf[buf_size];
-  
+
   // Private Methods
   void init( const char *filename, int width, int height );
   void init_page();
   void finish_page();
-  void destroy();  
-  
+  void destroy();
+
 };
-  
+
 
 #endif

@@ -1,13 +1,25 @@
-﻿生成启动时间为 2016/5/1 20:06:45。
-     1>项目“F:\李昊峰\大学资料\算法导论\pa2 binary tree\binary tree\binary tree\binary tree.vcxproj”在节点 2 上(Build 个目标)。
+﻿生成启动时间为 2016/5/2 0:38:01。
+     1>项目“F:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\binary tree.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _CRT_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt test.cc
          test.cc
-       Link:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\李昊峰\大学资料\算法导论\pa2 binary tree\binary tree\Debug\binary tree.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\李昊峰\大学资料\算法导论\pa2 binary tree\binary tree\Debug\binary tree.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\李昊峰\大学资料\算法导论\pa2 binary tree\binary tree\Debug\binary tree.lib" /MACHINE:X86 Debug\test.obj
-         binary tree.vcxproj -> F:\李昊峰\大学资料\算法导论\pa2 binary tree\binary tree\Debug\binary tree.exe
-     1>已完成生成项目“F:\李昊峰\大学资料\算法导论\pa2 binary tree\binary tree\binary tree\binary tree.vcxproj”(Build 个目标)的操作。
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(42): warning C4018: “>=”: 有符号/无符号不匹配
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(80): error C4996: 'strdup': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strdup. See online help for details.
+                 d:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(245) : 参见“strdup”的声明
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(215): error C2065: “M_PI”: 未声明的标识符
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(224): error C2065: “M_PI”: 未声明的标识符
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(254): error C2065: “M_PI”: 未声明的标识符
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(262): error C2065: “M_PI”: 未声明的标识符
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(304): error C2065: “M_PI”: 未声明的标识符
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(304): error C2660: “PDF::arc”: 函数不接受 4 个参数
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(305): error C2065: “M_PI”: 未声明的标识符
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(305): error C2660: “PDF::arc”: 函数不接受 4 个参数
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(306): error C2065: “M_PI”: 未声明的标识符
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(306): error C2660: “PDF::arc”: 函数不接受 4 个参数
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(307): error C2065: “M_PI”: 未声明的标识符
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(307): error C2660: “PDF::arc”: 函数不接受 4 个参数
+     1>已完成生成项目“F:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\binary tree.vcxproj”(Build 个目标)的操作 - 失败。
 
-生成成功。
+生成失败。
 
-已用时间 00:00:01.18
+已用时间 00:00:01.59
