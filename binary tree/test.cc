@@ -35,19 +35,19 @@ int main()
     elements[k] = k;
 
   // Construct a PDF object to write the tree output
-  /**PDF *pdf = new PDF("trees.pdf");**/
+  PDF *pdf = new PDF("trees.pdf");
 
   // Create a new binary tree, having 'n' elements
   int n = 12;  // <-- try changing the value of 'n'
   BinaryTree<int> tree(elements, n);
-  
+
   // Output the tree
   cout << "tree output via << operator:\n" << tree << "\n";
 
   // Draw the tree
   ostringstream ostring;
   ostring << "Complete tree having " << n << " nodes";
-  /**tree.display(pdf, ostring.str());//**/
+  tree.display(pdf, ostring.str());
 
   // Check 'is_empty()'
   if (tree.is_empty() && n > 0)
@@ -77,7 +77,7 @@ int main()
 	  cerr << "n_leaves() mismatch: expected " << n_leaves_expected
 		  << ", got " << n_leaves << "\n";
   }
-  
+
   // Use the copy constructor to create a duplicate of 'tree'
   BinaryTree<int> tree_copy(tree);
 
@@ -88,7 +88,6 @@ int main()
   if (tree_copy != tree) {
 	  cerr << "!= operator: expected false, got true\n";
   }
-
 
   // Empty the copy, and initialize
   tree_copy.empty_this();
@@ -127,10 +126,10 @@ int main()
   cout << "\n";
 
   // Finish the PDF object
-  /**pdf->finish();
-  delete pdf;**/
+  pdf->finish();
+  delete pdf;
 
-  system("pause");
+  //system("pause");
   return 0;
 }
 
