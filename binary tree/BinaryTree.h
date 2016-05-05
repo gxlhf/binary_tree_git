@@ -406,7 +406,7 @@ BinaryTree<T>& BinaryTree<T>::operator=(const BinaryTree& src)
 {
 	T* srcEle;
 	int srcNodeNum = src.node_count();
-	srcEle = new T[srcNodeNum];
+	srcEle = new T[srcNodeNum + 1];
 	src.to_flat_array(srcEle, srcNodeNum);
 	this->root = NULL;
 	this->init_complete(srcEle, srcNodeNum);
