@@ -1,4 +1,4 @@
-#ifndef __BinaryTree_H
+﻿#ifndef __BinaryTree_H
 #define __BinaryTree_H
 
 #include <iostream>
@@ -88,6 +88,7 @@ class BinaryTree {
 
   /* "Helper" functions for the basic operations */
   BTNode<T> *clone( BTNode<T> *node );
+  bool compare(BTNode<T> *a, BTNode<T> *b) const;
 
   int height( BTNode<T>* node ) const;
   int balance_factor( BTNode<T>* node ) const;
@@ -225,14 +226,7 @@ BTNode<T>* BinaryTree<T>::init_complete(T *elements, int n_elements,int index)
 template<class T>
 BinaryTree<T>::BinaryTree(const BinaryTree& src)
 {
-	T* srcEle;
-	int srcNodeNum = src.node_count();
-
-	srcEle = new T [srcNodeNum + 1];
-	src.to_flat_array(srcEle, srcNodeNum);
-
-	root = NULL;
-	init_complete(srcEle, srcNodeNum);
+	root = clone(src.root);
 }
 
 /********************/
@@ -375,24 +369,10 @@ int BinaryTree<T>::to_flat_array(T *elements, int max, BTNode<T> *node,
 template<class T>
 bool BinaryTree<T>::operator==(const BinaryTree& src) const
 {
-	//if the node numbers of these trees are not equal, they are obviously not equal.
-	int thisNodeNum = this->node_count();
-	int srcNodeNum = src.node_count();
-	if (thisNodeNum != srcNodeNum)
+	
+	if ((this->root && !src.root) || (!this->root && src.root))
 		return 0;
-
-	//convert the two tree into flat array and compare.
-	T *thisElem, *srcElem;
-	thisElem = new T[thisNodeNum + 1];
-	srcElem = new T[srcNodeNum + 1];
-	this->to_flat_array(thisElem, thisNodeNum);
-	src.to_flat_array(srcElem, srcNodeNum);
-	for (int i = 1; i <= thisNodeNum; i++)
-	{
-		if (thisElem[i] != srcElem[i])
-			return 0;
-	}
-	return 1;
+	return compare(this->root, src.root);
 }
 
 template<class T>
@@ -404,12 +384,7 @@ bool BinaryTree<T>::operator!=(const BinaryTree& src) const
 template<class T>
 BinaryTree<T>& BinaryTree<T>::operator=(const BinaryTree& src)
 {
-	T* srcEle;
-	int srcNodeNum = src.node_count();
-	srcEle = new T[srcNodeNum + 1];
-	src.to_flat_array(srcEle, srcNodeNum);
-	this->root = NULL;
-	this->init_complete(srcEle, srcNodeNum);
+	this->root = clone(src.root);
 	return *this;
 }
 
@@ -431,6 +406,30 @@ void BinaryTree<T>::empty(BTNode<T>* node)
 
 }
 
+template<class T>
+BTNode<T>* BinaryTree<T>::clone(BTNode<T> *node)
+{
+	if (!node)
+		return NULL;
+	BTNode<T>* temp;
+	temp = new BTNode<T>;
+	temp->elem = node->elem;
+	temp->left = clone(node->left);//递归调用clone，完成左右子树的复制
+	temp->right = clone(node->right);
+	return temp;
+}
+
+template<class T>
+bool BinaryTree<T>::compare(BTNode<T> *a, BTNode<T> *b) const
+{
+	if (!a || !b)
+		return 1;
+	if (a->elem == b->elem)
+		return compare(a->left, b->left) && compare(a->right, b->right);// 递归调用compare，完成对左右子树的比较
+		
+	else
+		return 0;
+}
 /**************************/
 /* Input/Output Operators */
 /**************************/
