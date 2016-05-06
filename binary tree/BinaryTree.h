@@ -369,6 +369,9 @@ int BinaryTree<T>::to_flat_array(T *elements, int max, BTNode<T> *node,
 template<class T>
 bool BinaryTree<T>::operator==(const BinaryTree& src) const
 {
+	
+	if ((this->root && !src.root) || (!this->root && src.root))
+		return 0;
 	return compare(this->root, src.root);
 }
 
@@ -419,10 +422,11 @@ BTNode<T>* BinaryTree<T>::clone(BTNode<T> *node)
 template<class T>
 bool BinaryTree<T>::compare(BTNode<T> *a, BTNode<T> *b) const
 {
-	if (!a && !b)
+	if (!a || !b)
 		return 1;
-	if (a && b && a->elem == b->elem)
+	if (a->elem == b->elem)
 		return compare(a->left, b->left) && compare(a->right, b->right);// 递归调用compare，完成对左右子树的比较
+		
 	else
 		return 0;
 }
