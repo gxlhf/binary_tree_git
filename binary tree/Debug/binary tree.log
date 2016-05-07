@@ -1,4 +1,4 @@
-﻿生成启动时间为 2016/5/2 0:38:01。
+﻿生成启动时间为 2016/5/7 11:34:04。
      1>项目“F:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\binary tree.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _CRT_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt test.cc
@@ -18,8 +18,14 @@
      1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(306): error C2660: “PDF::arc”: 函数不接受 4 个参数
      1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(307): error C2065: “M_PI”: 未声明的标识符
      1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\pdf.cc(307): error C2660: “PDF::arc”: 函数不接受 4 个参数
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\test.cc(32): error C2057: 应输入常量表达式
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\test.cc(32): error C2466: 不能分配常量大小为 0 的数组
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\test.cc(32): error C2133: “elements”: 未知的大小
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\test.cc(107): error C2057: 应输入常量表达式
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\test.cc(107): error C2466: 不能分配常量大小为 0 的数组
+     1>f:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\test.cc(107): error C2133: “elements2”: 未知的大小
      1>已完成生成项目“F:\李昊峰\大学资料\算法导论\pa2 binary tree\binary_tree_git\binary tree\binary tree.vcxproj”(Build 个目标)的操作 - 失败。
 
 生成失败。
 
-已用时间 00:00:01.59
+已用时间 00:00:04.47

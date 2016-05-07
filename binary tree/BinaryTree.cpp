@@ -311,9 +311,9 @@ BTNode<T>* BinaryTree<T>::clone(BTNode<T> *node)
 template<class T>
 bool BinaryTree<T>::compare(BTNode<T> *a, BTNode<T> *b) const
 {
-	if (!a || !b)
+	if (!a && !b)
 		return 1;
-	if (a->elem == b->elem)
+	if (a && b && a->elem == b->elem)
 		return compare(a->left, b->left) && compare(a->right, b->right);// 递归调用compare，完成对左右子树的比较
 	else
 		return 0;
