@@ -91,7 +91,6 @@ int main( int argc, char *argv[] )
 
   // Empty the copy, and initialize
   tree_copy.empty_this();
-  //tree_copy.init_complete(elements, n);
   if (!(tree_copy == tree)) {
     cerr << "== operator: expected true, got false\n";
   }
